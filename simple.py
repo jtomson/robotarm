@@ -15,6 +15,7 @@ Control-C to exit
 
 from robotarm.al5x import Al5x, AL5D
 from robotarm.controllers import Ssc32
+import sys
 
 # these settings are for the macOS Virtual COM port driver
 # http://www.ftdichip.com/Drivers/VCP.htm
@@ -23,10 +24,19 @@ s = Ssc32('/dev/tty.usbserial-AH05FPDM', baud=9600)
 s.trim(2, 0.025)
 s.trim(3, -0.025)
 
-r = Al5x(AL5D, servo_controller=s)
-r.avg_speed = 3000
-r.parked_state = dict(pos=[0, 8, 3], gripper_angle=0.0,
-                grip=0.0, wrist_rotate=0.0)
+r = Al5x(AL5D, 
+    servo_controller=s,
+    parked_state=dict(pos=[0, 8, 0], gripper_angle=180.0, grip=0.7, wrist_rotate=180.0),
+    avg_speed=3000)
+
+def ok():
+    print 'OK'
+    sys.stdout.flush()
+
+def bad():
+    print 'BAD'
+    sys.stdout.flush()
+
 while True:
 
     try:
@@ -38,19 +48,19 @@ while True:
             if len(coords) == 3:
                 x,y,z = map(float, coords)
                 r.move({'pos':[x,y,z]})
-                print 'OK'
+                ok()
             else:
-                print 'BAD'
+                bad()
 
         elif cmd == 's':
             speed = int(line[1:])
             r.avg_speed = speed
-            print 'OK'
+            ok()
 
         else:
-            print 'BAD'
+            bad()
 
     except KeyboardInterrupt:
         exit(0)
     except:
-        print 'BAD'
+        bad()

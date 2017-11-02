@@ -136,8 +136,6 @@ class Al5x(object):
         self.avg_speed = avg_speed
         self.dt = dt
 
-        self.immediate_move(self.parked_state)
-
     def get_state(self):
         """Return current state"""
         return dict(self.current_state)
