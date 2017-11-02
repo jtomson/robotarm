@@ -221,6 +221,9 @@ class Al5x(object):
         acceleration into and out of the move.
 
         """
+        if dist == 0:
+            return iter([None]), 0
+
         time = float(dist) / self.avg_speed
         ## Fix problem with fast short moves and slow long ones
         time = (time + sqrt(time * 2)) / 2
