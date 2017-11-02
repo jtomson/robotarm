@@ -1,5 +1,5 @@
 """
-simple.py - a unglamorous interactive script for moving the arm and setting its speed
+simple.py - an unglamorous interactive script for moving the arm and setting its speed
 
 ex on stdin:
 m 1 8 0
