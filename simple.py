@@ -26,7 +26,7 @@ s.trim(3, -0.025)
 
 r = Al5x(AL5D, 
     servo_controller=s,
-    parked_state=dict(pos=[0, 8, 0], gripper_angle=180.0, grip=0.7, wrist_rotate=180.0),
+    parked_state=dict(pos=[0, 6, -1], gripper_angle=180.0, grip=0.7, wrist_rotate=180.0),
     avg_speed=3000)
 
 def ok():
